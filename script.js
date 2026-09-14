@@ -52,9 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // GOOGLE APPS SCRIPT
     // ================================
 
-    const SCRIPT_URL =
-        "https://script.google.com/macros/s/AKfycbyX5xD66N_STgXwoYyLYfMiOzo5a4vBUxiDXTTY3PeSpc6t_sFYNzNYqR-T2oQO0RQM/exec";
-
+   const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbzwjGOjB3583TX5zX1GRZGAqHGVXs-Od38B7D5ygWC0TJtSDM0nMbZmbP6WBVIMYaDU/exec";
 
     // Cari form aduan
     const formAduan =
