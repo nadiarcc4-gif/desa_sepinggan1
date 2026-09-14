@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aduan Desa - Sepingganbesar</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            🌿 Sepingganbesar
+        </a>
+
+        <div class="menu">
+
+            <a href="index.html">Beranda</a>
+            <a href="profil.html">Profil</a>
+            <a href="keindahan.html">Keindahan</a>
+            <a href="potensi.html">Potensi</a>
+            <a href="galeri.html">Galeri</a>
+            <a href="aduan.html" class="active">Aduan</a>
+            <a href="kontak.html">Kontak</a>
+
+        </div>
+
+        <button class="menu-toggle">☰</button>
+
+    </nav>
+
+</header>
+
+
+<section class="location">
+
+    <div class="section-title">
+
+        <p>LAYANAN MASYARAKAT</p>
+
+        <h2>Sampaikan Aduan</h2>
+
+    </div>
+
+    <p class="location-text">
+        Sampaikan aduan atau keluhan Anda
+        mengenai Desa Sepingganbesar.
+    </p>
+
+
+    <form id="formAduan"
+          style="max-width:700px; margin:30px auto; text-align:left;">
+
+        <label for="nama">Nama</label>
+
+        <input
+            type="text"
+            id="nama"
+            required
+            placeholder="Masukkan nama Anda"
+            style="width:100%; padding:12px; margin:8px 0 20px; box-sizing:border-box;"
+        >
+
+
+        <label for="email">Email</label>
+
+        <input
+            type="email"
+            id="email"
+            required
+            placeholder="Masukkan email Anda"
+            style="width:100%; padding:12px; margin:8px 0 20px; box-sizing:border-box;"
+        >
+
+
+        <label for="kategori">Kategori</label>
+
+        <select
+            id="kategori"
+            required
+            style="width:100%; padding:12px; margin:8px 0 20px; box-sizing:border-box;"
+        >
+
+            <option value="">Pilih kategori</option>
+
+            <option value="Infrastruktur">Infrastruktur</option>
+
+            <option value="Lingkungan">Lingkungan</option>
+
+            <option value="Pelayanan">Pelayanan</option>
+
+            <option value="Keamanan">Keamanan</option>
+
+            <option value="Sosial">Sosial</option>
+
+            <option value="Lainnya">Lainnya</option>
+
+        </select>
+
+
+        <label for="judul">Judul Aduan</label>
+
+        <input
+            type="text"
+            id="judul"
+            required
+            placeholder="Contoh: Jalan rusak"
+            style="width:100%; padding:12px; margin:8px 0 20px; box-sizing:border-box;"
+        >
+
+
+        <label for="deskripsi">Deskripsi</label>
+
+        <textarea
+            id="deskripsi"
+            required
+            rows="6"
+            placeholder="Tuliskan aduan Anda..."
+            style="width:100%; padding:12px; margin:8px 0 20px; box-sizing:border-box;"
+        ></textarea>
+
+
+        <button
+            type="submit"
+            class="btn"
+            id="btnKirim">
+            Kirim Aduan
+        </button>
+
+    </form>
+
+</section>
+
+
+<footer>
+
+    <h3>🌿 Sepingganbesar</h3>
+
+    <p>
+        Keindahan Desa dari Kalimantan Barat
+    </p>
+
+    <p class="copyright">
+        © 2026 Sepingganbesar. Website Keindahan Desa.
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
