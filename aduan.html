@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +11,239 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* ================================
+           BAGIAN ADUAN
+        ================================= */
+
+        .aduan-box {
+            max-width: 700px;
+            margin: 35px auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .aduan-box label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 7px;
+            font-weight: 600;
+        }
+
+        .aduan-box input,
+        .aduan-box select,
+        .aduan-box textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .aduan-box input:focus,
+        .aduan-box select:focus,
+        .aduan-box textarea:focus {
+            border-color: #6d28d9;
+        }
+
+        .aduan-box textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .btn-aduan {
+            width: 100%;
+            margin-top: 20px;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background: #6d28d9;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-aduan:hover {
+            background: #5b21b6;
+        }
+
+        .btn-aduan:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        /* ================================
+           HASIL TOKEN
+        ================================= */
+
+        .token-box {
+            display: none;
+            max-width: 700px;
+            margin: 25px auto;
+            padding: 25px;
+            background: #f3e8ff;
+            border-radius: 18px;
+            text-align: center;
+            border: 1px solid #ddd6fe;
+        }
+
+        .token-box h3 {
+            color: #5b21b6;
+            margin-bottom: 10px;
+        }
+
+        .token {
+            display: inline-block;
+            margin: 15px 0;
+            padding: 12px 20px;
+            background: white;
+            border-radius: 10px;
+            color: #5b21b6;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .btn-copy {
+            display: block;
+            margin: 5px auto;
+            padding: 9px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #5b21b6;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* ================================
+           CEK ADUAN
+        ================================= */
+
+        .cek-box {
+            max-width: 700px;
+            margin: 50px auto 30px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .cek-box h2 {
+            color: #5b21b6;
+            margin-bottom: 8px;
+        }
+
+        .cek-box p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .cek-input {
+            width: 100%;
+            padding: 13px;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+
+        .hasil-aduan {
+            margin-top: 25px;
+        }
+
+        .hasil-card {
+            background: #faf9ff;
+            border: 1px solid #eee;
+            border-radius: 15px;
+            padding: 22px;
+        }
+
+        .hasil-card h3 {
+            color: #5b21b6;
+            margin-bottom: 15px;
+        }
+
+        .hasil-card p {
+            margin: 9px 0;
+            color: #444;
+        }
+
+        .status-aduan {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #ede9fe;
+            color: #5b21b6;
+            font-weight: 600;
+        }
+
+        .tanggapan {
+            margin-top: 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #6d28d9;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .pesan {
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 10px;
+        }
+
+        .pesan-error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .pesan-loading {
+            background: #f3e8ff;
+            color: #5b21b6;
+        }
+
+        @media (max-width: 600px) {
+
+            .aduan-box,
+            .cek-box {
+                margin-left: 15px;
+                margin-right: 15px;
+                padding: 20px;
+            }
+
+            .token {
+                font-size: 18px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
+<!-- ================================
+     NAVBAR
+================================= -->
+
 <header>
+
     <nav class="navbar">
 
         <a href="index.html" class="logo">
@@ -23,136 +251,282 @@
         </a>
 
         <div class="menu">
-            <a href="index.html">Beranda</a>
-            <a href="profil.html">Profil</a>
-            <a href="keindahan.html">Keindahan</a>
-            <a href="potensi.html">Potensi</a>
-            <a href="galeri.html">Galeri</a>
-            <a href="aduan.html" class="active">Aduan</a>
-            <a href="kontak.html">Kontak</a>
+
+            <a href="index.html">
+                Beranda
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+            <a href="keindahan.html">
+                Keindahan
+            </a>
+
+            <a href="potensi.html">
+                Potensi
+            </a>
+
+            <a href="galeri.html">
+                Galeri
+            </a>
+
+            <a href="aduan.html" class="active">
+                Aduan
+            </a>
+
+            <a href="kontak.html">
+                Kontak
+            </a>
+
         </div>
 
-        <button class="menu-toggle">☰</button>
+        <button class="menu-toggle">
+            ☰
+        </button>
 
     </nav>
+
 </header>
+
+
+<!-- ================================
+     FORM ADUAN
+================================= -->
 
 <section class="location">
 
     <div class="section-title">
-        <p>LAYANAN MASYARAKAT</p>
-        <h2>Sampaikan Aduan</h2>
+
+        <p>
+            LAYANAN MASYARAKAT
+        </p>
+
+        <h2>
+            Sampaikan Aduan
+        </h2>
+
     </div>
 
+
     <p class="location-text">
-        Silakan sampaikan aduan atau keluhan Anda kepada
-        Desa Sepingganbesar.
+
+        Silakan sampaikan aduan atau keluhan Anda
+        kepada Desa Sepingganbesar.
+
     </p>
 
-    <form id="formAduan"
-          style="max-width:700px;margin:30px auto;text-align:left;">
 
-        <label for="nama">Nama</label>
+    <div class="aduan-box">
 
-        <input
-            type="text"
-            id="nama"
-            required
-            style="width:100%;padding:12px;margin:8px 0 20px;box-sizing:border-box;"
-        >
+        <form id="formAduan">
 
-        <label for="email">Email</label>
 
-        <input
-            type="email"
-            id="email"
-            required
-            style="width:100%;padding:12px;margin:8px 0 20px;box-sizing:border-box;"
-        >
+            <label for="nama">
+                Nama
+            </label>
 
-        <label for="kategori">Kategori</label>
+            <input
+                type="text"
+                id="nama"
+                placeholder="Masukkan nama Anda"
+                required
+            >
 
-        <select
-            id="kategori"
-            required
-            style="width:100%;padding:12px;margin:8px 0 20px;box-sizing:border-box;"
-        >
-            <option value="">Pilih kategori</option>
-            <option value="Infrastruktur">Infrastruktur</option>
-            <option value="Lingkungan">Lingkungan</option>
-            <option value="Pelayanan">Pelayanan</option>
-            <option value="Keamanan">Keamanan</option>
-            <option value="Sosial">Sosial</option>
-            <option value="Lainnya">Lainnya</option>
-        </select>
 
-        <label for="judul">Judul Aduan</label>
+            <label for="email">
+                Email
+            </label>
 
-        <input
-            type="text"
-            id="judul"
-            required
-            style="width:100%;padding:12px;margin:8px 0 20px;box-sizing:border-box;"
-        >
+            <input
+                type="email"
+                id="email"
+                placeholder="Masukkan email Anda"
+                required
+            >
 
-        <label for="deskripsi">Deskripsi Aduan</label>
 
-        <textarea
-            id="deskripsi"
-            required
-            rows="6"
-            style="width:100%;padding:12px;margin:8px 0 20px;box-sizing:border-box;"
-        ></textarea>
+            <label for="kategori">
+                Kategori
+            </label>
 
-        <button
-            type="submit"
-            class="btn"
-            id="btnKirim">
-            Kirim Aduan
-        </button>
+            <select
+                id="kategori"
+                required
+            >
 
-    </form>
-<!-- CEK ADUAN -->
-<div style="max-width:700px;margin:50px auto 20px;text-align:left;">
+                <option value="">
+                    Pilih kategori
+                </option>
 
-    <div class="section-title">
-        <p>CEK ADUAN</p>
-        <h2>Lihat Tanggapan Admin</h2>
+                <option value="Infrastruktur">
+                    Infrastruktur
+                </option>
+
+                <option value="Lingkungan">
+                    Lingkungan
+                </option>
+
+                <option value="Pelayanan">
+                    Pelayanan
+                </option>
+
+                <option value="Keamanan">
+                    Keamanan
+                </option>
+
+                <option value="Sosial">
+                    Sosial
+                </option>
+
+                <option value="Lainnya">
+                    Lainnya
+                </option>
+
+            </select>
+
+
+            <label for="judul">
+                Judul Aduan
+            </label>
+
+            <input
+                type="text"
+                id="judul"
+                placeholder="Contoh: Jalan rusak"
+                required
+            >
+
+
+            <label for="deskripsi">
+                Deskripsi Aduan
+            </label>
+
+            <textarea
+                id="deskripsi"
+                placeholder="Jelaskan aduan Anda secara lengkap..."
+                required
+            ></textarea>
+
+
+            <button
+                type="submit"
+                class="btn-aduan"
+                id="btnKirim"
+            >
+                Kirim Aduan
+            </button>
+
+        </form>
+
     </div>
 
-    <p class="location-text">
-        Masukkan token aduan yang kamu dapat setelah mengirim aduan.
-    </p>
 
-    <input
-        type="text"
-        id="tokenCek"
-        placeholder="Masukkan token aduan"
-        maxlength="8"
-        style="
-            width:100%;
-            padding:12px;
-            margin:10px 0;
-            box-sizing:border-box;
-            text-transform:uppercase;
-        "
+    <!-- ================================
+         TOKEN
+    ================================= -->
+
+    <div
+        class="token-box"
+        id="tokenBox"
     >
 
-    <button
-        type="button"
-        class="btn"
-        onclick="cekAduan()">
-        Cek Status Aduan
-    </button>
+        <h3>
+            ✅ Aduan Berhasil Dikirim
+        </h3>
 
-    <div id="hasilAduan" style="margin-top:20px;"></div>
+        <p>
+            Simpan token berikut untuk melihat
+            status dan tanggapan dari admin.
+        </p>
 
-</div>
+        <div
+            class="token"
+            id="tokenHasil"
+        >
+        </div>
+
+        <button
+            class="btn-copy"
+            onclick="salinToken()"
+        >
+            📋 Salin Token
+        </button>
+
+        <p>
+            Jangan sampai kehilangan token ini.
+        </p>
+
+    </div>
+
+
+    <!-- ================================
+         CEK ADUAN
+    ================================= -->
+
+    <div class="cek-box">
+
+        <div class="section-title">
+
+            <p>
+                CEK ADUAN
+            </p>
+
+            <h2>
+                Lihat Tanggapan Admin
+            </h2>
+
+        </div>
+
+
+        <p>
+
+            Masukkan token aduan yang kamu dapat
+            setelah mengirim aduan.
+
+        </p>
+
+
+        <input
+            type="text"
+            id="tokenCek"
+            class="cek-input"
+            placeholder="Contoh: AB12CD34"
+            maxlength="8"
+        >
+
+
+        <button
+            type="button"
+            class="btn-aduan"
+            onclick="cekAduan()"
+        >
+            🔍 Cek Status Aduan
+        </button>
+
+
+        <div
+            id="hasilAduan"
+            class="hasil-aduan"
+        >
+        </div>
+
+    </div>
+
+
 </section>
+
+
+<!-- ================================
+     FOOTER
+================================= -->
 
 <footer>
 
-    <h3>🌿 Sepingganbesar</h3>
+    <h3>
+        🌿 Sepingganbesar
+    </h3>
 
     <p>
         Keindahan Desa dari Kalimantan Barat
@@ -164,52 +538,227 @@
 
 </footer>
 
+
 <script src="script.js"></script>
 
-<!-- SCRIPT CEK ADUAN -->
+
 <script>
+
+
+// ==========================================
+// URL GOOGLE APPS SCRIPT
+// ==========================================
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbzwjGOjB3583TX5zX1GRZGAqHGVXs-Od38B7D5ygWC0TJtSDM0nMbZmbP6WBVIMYaDU/exec";
 
 
+
+// ==========================================
+// FORM KIRIM ADUAN
+// ==========================================
+
+document
+    .getElementById("formAduan")
+    .addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+
+        const nama =
+            document.getElementById("nama").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const kategori =
+            document.getElementById("kategori").value;
+
+        const judul =
+            document.getElementById("judul").value.trim();
+
+        const deskripsi =
+            document.getElementById("deskripsi").value.trim();
+
+        const tombol =
+            document.getElementById("btnKirim");
+
+
+        tombol.disabled = true;
+
+        tombol.textContent =
+            "Mengirim aduan...";
+
+
+        const data = {
+
+            nama: nama,
+
+            email: email,
+
+            kategori: kategori,
+
+            judul: judul,
+
+            deskripsi: deskripsi
+
+        };
+
+
+        fetch(API_URL, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+
+            body: JSON.stringify(data)
+
+        })
+
+
+        .then(response => response.json())
+
+
+        .then(result => {
+
+
+            if (!result.success) {
+
+                throw new Error(
+                    result.error ||
+                    "Aduan gagal dikirim"
+                );
+
+            }
+
+
+            // Tampilkan token
+
+            document
+                .getElementById("tokenHasil")
+                .textContent = result.token;
+
+
+            document
+                .getElementById("tokenBox")
+                .style.display = "block";
+
+
+            // Kosongkan form
+
+            document
+                .getElementById("formAduan")
+                .reset();
+
+
+            tombol.disabled = false;
+
+            tombol.textContent =
+                "Kirim Aduan";
+
+
+            // Scroll ke token
+
+            document
+                .getElementById("tokenBox")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        })
+
+
+        .catch(error => {
+
+            alert(
+                "Gagal mengirim aduan.\n\n" +
+                error.message
+            );
+
+
+            tombol.disabled = false;
+
+            tombol.textContent =
+                "Kirim Aduan";
+
+        });
+
+    });
+
+
+
+// ==========================================
+// SALIN TOKEN
+// ==========================================
+
+function salinToken() {
+
+    const token =
+        document
+            .getElementById("tokenHasil")
+            .textContent;
+
+
+    navigator.clipboard
+        .writeText(token)
+        .then(function() {
+
+            alert(
+                "Token berhasil disalin!"
+            );
+
+        });
+
+}
+
+
+
+// ==========================================
+// CEK ADUAN
+// ==========================================
+
 function cekAduan() {
 
     const token =
-        document.getElementById("tokenCek")
-        .value
-        .trim()
-        .toUpperCase();
+        document
+            .getElementById("tokenCek")
+            .value
+            .trim()
+            .toUpperCase();
+
 
     const hasil =
-        document.getElementById("hasilAduan");
+        document
+            .getElementById("hasilAduan");
 
 
     if (!token) {
 
         hasil.innerHTML = `
-            <div style="
-                background:#fee2e2;
-                padding:15px;
-                border-radius:10px;
-                color:#991b1b;
-            ">
+
+            <div class="pesan pesan-error">
+
                 Silakan masukkan token aduan.
+
             </div>
+
         `;
 
         return;
+
     }
 
 
     hasil.innerHTML = `
-        <div style="
-            background:#f3e8ff;
-            padding:15px;
-            border-radius:10px;
-        ">
-            Sedang mengecek aduan...
+
+        <div class="pesan pesan-loading">
+
+            🔄 Sedang mengecek aduan...
+
         </div>
+
     `;
 
 
@@ -219,24 +768,32 @@ function cekAduan() {
         encodeURIComponent(token)
     )
 
+
     .then(response => response.json())
 
+
     .then(result => {
+
 
         if (!result.success) {
 
             hasil.innerHTML = `
-                <div style="
-                    background:#fee2e2;
-                    padding:15px;
-                    border-radius:10px;
-                    color:#991b1b;
-                ">
-                    Token tidak ditemukan.
+
+                <div class="pesan pesan-error">
+
+                    ❌ Token tidak ditemukan.
+
+                    <br><br>
+
+                    Pastikan token yang dimasukkan
+                    sudah benar.
+
                 </div>
+
             `;
 
             return;
+
         }
 
 
@@ -245,89 +802,127 @@ function cekAduan() {
 
         hasil.innerHTML = `
 
-            <div style="
-                background:white;
-                padding:20px;
-                border-radius:15px;
-                box-shadow:0 4px 15px rgba(0,0,0,0.08);
-            ">
+            <div class="hasil-card">
 
-                <h3 style="
-                    color:#5b21b6;
-                    margin-bottom:15px;
-                ">
-                    ${aduan.judul || "Aduan"}
+                <h3>
+                    ${escapeHTML(aduan.judul || "Aduan")}
                 </h3>
 
-                <p style="margin:8px 0;">
-                    <b>Nama:</b>
-                    ${aduan.nama || "-"}
-                </p>
-
-                <p style="margin:8px 0;">
-                    <b>Kategori:</b>
-                    ${aduan.kategori || "-"}
-                </p>
-
-                <p style="margin:8px 0;">
-                    <b>Status:</b>
-                    <span style="
-                        display:inline-block;
-                        background:#ede9fe;
-                        color:#5b21b6;
-                        padding:5px 10px;
-                        border-radius:20px;
-                    ">
-                        ${aduan.status || "Belum diproses"}
-                    </span>
-                </p>
-
-                <hr style="
-                    margin:20px 0;
-                    border:0;
-                    border-top:1px solid #eee;
-                ">
 
                 <p>
-                    <b>Tanggapan Admin:</b>
+
+                    <b>Nama:</b>
+                    ${escapeHTML(aduan.nama || "-")}
+
                 </p>
 
-                <div style="
-                    margin-top:10px;
-                    background:#f9f7ff;
-                    padding:15px;
-                    border-radius:10px;
-                ">
+
+                <p>
+
+                    <b>Kategori:</b>
+                    ${escapeHTML(aduan.kategori || "-")}
+
+                </p>
+
+
+                <p>
+
+                    <b>Tanggal:</b>
+                    ${escapeHTML(aduan.tanggal || "-")}
+
+                </p>
+
+
+                <p>
+
+                    <b>Status:</b>
+
+                    <span class="status-aduan">
+
+                        ${escapeHTML(
+                            aduan.status ||
+                            "Belum diproses"
+                        )}
+
+                    </span>
+
+                </p>
+
+
+                <hr
+                    style="
+                        margin:20px 0;
+                        border:0;
+                        border-top:1px solid #eee;
+                    "
+                >
+
+
+                <p>
+
+                    <b>
+                        Tanggapan Admin:
+                    </b>
+
+                </p>
+
+
+                <div class="tanggapan">
+
                     ${
                         aduan.tanggapan
-                        || "Belum ada tanggapan dari admin."
+                        ? escapeHTML(
+                            aduan.tanggapan
+                          )
+                        : "Belum ada tanggapan dari admin."
                     }
+
                 </div>
 
             </div>
 
         `;
 
+
     })
+
 
     .catch(error => {
 
         hasil.innerHTML = `
-            <div style="
-                background:#fee2e2;
-                padding:15px;
-                border-radius:10px;
-                color:#991b1b;
-            ">
-                Terjadi kesalahan saat mengecek aduan.
+
+            <div class="pesan pesan-error">
+
+                ❌ Terjadi kesalahan saat
+                mengecek aduan.
+
             </div>
+
         `;
 
     });
 
 }
 
+
+
+// ==========================================
+// MENCEGAH HTML BERBAHAYA
+// ==========================================
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
 </script>
+
 
 </body>
 </html>
