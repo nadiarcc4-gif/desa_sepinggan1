@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin - Aduan Desa Sepinggan</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f0ff;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #5b21b6;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      color: #5b21b6;
+      margin-bottom: 10px;
+    }
+
+    .info {
+      margin: 7px 0;
+      color: #444;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: #ede9fe;
+      color: #5b21b6;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 15px;
+      background: #6d28d9;
+      color: white;
+      border: none;
+      padding: 11px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #5b21b6;
+    }
+
+    .kosong {
+      text-align: center;
+      padding: 30px;
+      color: #777;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Admin Aduan Desa Sepinggan</h1>
+  <p class="subtitle">
+    Kelola aduan masyarakat dan berikan tanggapan.
+  </p>
+
+  <div id="daftarAduan">
+    <div class="loading">
+      Memuat data aduan...
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzwjGOjB3583TX5zX1GRZGAqHGVXs-Od38B7D5ygWC0TJtSDM0nMbZmbP6WBVIMYaDU/exec";
+
+
+function tampilkanAduan(data) {
+
+  const container = document.getElementById("daftarAduan");
+
+  container.innerHTML = "";
+
+  if (!data || data.length === 0) {
+    container.innerHTML = `
+      <div class="card kosong">
+        Belum ada aduan masyarakat.
+      </div>
+    `;
+    return;
+  }
+
+  data.forEach((aduan, index) => {
+
+    const card = document.createElement("div");
+
+    card.className = "card";
+
+    card.innerHTML = `
+
+      <h3>${aduan.judul || "Tanpa Judul"}</h3>
+
+      <p class="info">
+        <b>Nama:</b> ${aduan.nama || "-"}
+      </p>
+
+      <p class="info">
+        <b>Email:</b> ${aduan.email || "-"}
+      </p>
+
+      <p class="info">
+        <b>Kategori:</b> ${aduan.kategori || "-"}
+      </p>
+
+      <p class="info">
+        <b>Deskripsi:</b><br>
+        ${aduan.deskripsi || "-"}
+      </p>
+
+      <p class="info">
+        <b>Tanggal:</b> ${aduan.tanggal || "-"}
+      </p>
+
+      <p class="info">
+        <b>Status saat ini:</b>
+        <span class="status">
+          ${aduan.status || "Belum diproses"}
+        </span>
+      </p>
+
+      <label>Status Aduan</label>
+
+      <select id="status-${index}">
+        <option value="Belum diproses"
+          ${aduan.status === "Belum diproses" ? "selected" : ""}>
+          Belum diproses
+        </option>
+
+        <option value="Diproses"
+          ${aduan.status === "Diproses" ? "selected" : ""}>
+          Diproses
+        </option>
+
+        <option value="Selesai"
+          ${aduan.status === "Selesai" ? "selected" : ""}>
+          Selesai
+        </option>
+      </select>
+
+      <label>Tanggapan Admin</label>
+
+      <textarea
+        id="tanggapan-${index}"
+        placeholder="Tulis tanggapan untuk masyarakat..."
+      >${aduan.tanggapan || ""}</textarea>
+
+      <button onclick="simpanTanggapan(
+        ${aduan.id},
+        ${index}
+      )">
+        Simpan Tanggapan
+      </button>
+
+    `;
+
+    container.appendChild(card);
+
+  });
+}
+
+
+function loadAduan() {
+
+  fetch(API_URL)
+
+    .then(response => response.json())
+
+    .then(result => {
+
+      if (result.success === false) {
+        throw new Error(result.error);
+      }
+
+      tampilkanAduan(result.data);
+
+    })
+
+    .catch(error => {
+
+      document.getElementById("daftarAduan").innerHTML = `
+        <div class="card kosong">
+          Gagal mengambil data aduan.<br>
+          ${error}
+        </div>
+      `;
+
+    });
+
+}
+
+
+function simpanTanggapan(id, index) {
+
+  const status =
+    document.getElementById(`status-${index}`).value;
+
+  const tanggapan =
+    document.getElementById(`tanggapan-${index}`).value;
+
+  if (tanggapan.trim() === "") {
+
+    alert("Tanggapan belum diisi!");
+
+    return;
+  }
+
+  const data = {
+
+    action: "tanggapan",
+
+    id: id,
+
+    status: status,
+
+    tanggapan: tanggapan
+
+  };
+
+
+  fetch(API_URL, {
+
+    method: "POST",
+
+    body: JSON.stringify(data)
+
+  })
+
+  .then(response => response.json())
+
+  .then(result => {
+
+    if (result.success) {
+
+      alert("Tanggapan berhasil disimpan!");
+
+      loadAduan();
+
+    } else {
+
+      alert(
+        "Gagal menyimpan: " +
+        result.error
+      );
+
+    }
+
+  })
+
+  .catch(error => {
+
+    alert(
+      "Terjadi kesalahan: " +
+      error
+    );
+
+  });
+
+}
+
+
+loadAduan();
+
+</script>
+
+</body>
+</html>
