@@ -112,7 +112,42 @@
         </button>
 
     </form>
+<!-- CEK ADUAN -->
+<div style="max-width:700px;margin:50px auto 20px;text-align:left;">
 
+    <div class="section-title">
+        <p>CEK ADUAN</p>
+        <h2>Lihat Tanggapan Admin</h2>
+    </div>
+
+    <p class="location-text">
+        Masukkan token aduan yang kamu dapat setelah mengirim aduan.
+    </p>
+
+    <input
+        type="text"
+        id="tokenCek"
+        placeholder="Masukkan token aduan"
+        maxlength="8"
+        style="
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+            box-sizing:border-box;
+            text-transform:uppercase;
+        "
+    >
+
+    <button
+        type="button"
+        class="btn"
+        onclick="cekAduan()">
+        Cek Status Aduan
+    </button>
+
+    <div id="hasilAduan" style="margin-top:20px;"></div>
+
+</div>
 </section>
 
 <footer>
