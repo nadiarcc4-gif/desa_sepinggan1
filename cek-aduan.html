@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Cek Aduan - Desa Sepinggan</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f4f0ff;
+  padding: 30px;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+}
+
+h1 {
+  color: #5b21b6;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  margin-top: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #6d28d9;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #5b21b6;
+}
+
+.hasil {
+  margin-top: 20px;
+}
+
+.status {
+  display: inline-block;
+  padding: 7px 13px;
+  border-radius: 20px;
+  background: #ede9fe;
+  color: #5b21b6;
+  font-weight: bold;
+}
+
+.info {
+  margin: 10px 0;
+}
+
+.error {
+  color: red;
+  margin-top: 15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Cek Status Aduan</h1>
+
+<p>
+Masukkan token aduan untuk melihat status dan tanggapan dari admin.
+</p>
+
+<div class="card">
+
+<label>
+<b>Token Aduan</b>
+</label>
+
+<input
+type="text"
+id="token"
+placeholder="Contoh: AB12CD34"
+maxlength="8"
+>
+
+<button onclick="cekAduan()">
+Cek Aduan
+</button>
+
+<div id="hasil"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzwjGOjB3583TX5zX1GRZGAqHGVXs-Od38B7D5ygWC0TJtSDM0nMbZmbP6WBVIMYaDU/exec";
+
+
+function cekAduan() {
+
+  const token =
+    document
+      .getElementById("token")
+      .value
+      .trim()
+      .toUpperCase();
+
+
+  const hasil =
+    document.getElementById("hasil");
+
+
+  if (!token) {
+
+    hasil.innerHTML =
+      `<p class="error">
+        Silakan masukkan token aduan.
+      </p>`;
+
+    return;
+  }
+
+
+  hasil.innerHTML =
+    "<p>Memeriksa aduan...</p>";
+
+
+  fetch(
+    API_URL +
+    "?token=" +
+    encodeURIComponent(token)
+  )
+
+  .then(response => response.json())
+
+  .then(result => {
+
+    if (!result.success) {
+
+      hasil.innerHTML =
+        `<p class="error">
+          ${result.error}
+        </p>`;
+
+      return;
+    }
+
+
+    const aduan = result.data;
+
+
+    hasil.innerHTML = `
+
+      <div class="hasil">
+
+        <hr>
+
+        <h2>${aduan.judul || "-"}</h2>
+
+        <p class="info">
+          <b>Nama:</b>
+          ${aduan.nama || "-"}
+        </p>
+
+        <p class="info">
+          <b>Kategori:</b>
+          ${aduan.kategori || "-"}
+        </p>
+
+        <p class="info">
+          <b>Tanggal:</b>
+          ${aduan.tanggal || "-"}
+        </p>
+
+        <p class="info">
+          <b>Status:</b>
+          <span class="status">
+            ${aduan.status || "Belum diproses"}
+          </span>
+        </p>
+
+        <p class="info">
+          <b>Tanggapan Admin:</b>
+        </p>
+
+        <div class="card">
+          ${aduan.tanggapan
+            || "Belum ada tanggapan dari admin."}
+        </div>
+
+      </div>
+
+    `;
+
+  })
+
+  .catch(error => {
+
+    hasil.innerHTML =
+      `<p class="error">
+        Terjadi kesalahan saat mengambil data.
+      </p>`;
+
+  });
+
+}
+
+</script>
+
+</body>
+
+</html>
