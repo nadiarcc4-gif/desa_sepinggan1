@@ -166,5 +166,168 @@
 
 <script src="script.js"></script>
 
+<!-- SCRIPT CEK ADUAN -->
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzwjGOjB3583TX5zX1GRZGAqHGVXs-Od38B7D5ygWC0TJtSDM0nMbZmbP6WBVIMYaDU/exec";
+
+
+function cekAduan() {
+
+    const token =
+        document.getElementById("tokenCek")
+        .value
+        .trim()
+        .toUpperCase();
+
+    const hasil =
+        document.getElementById("hasilAduan");
+
+
+    if (!token) {
+
+        hasil.innerHTML = `
+            <div style="
+                background:#fee2e2;
+                padding:15px;
+                border-radius:10px;
+                color:#991b1b;
+            ">
+                Silakan masukkan token aduan.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    hasil.innerHTML = `
+        <div style="
+            background:#f3e8ff;
+            padding:15px;
+            border-radius:10px;
+        ">
+            Sedang mengecek aduan...
+        </div>
+    `;
+
+
+    fetch(
+        API_URL +
+        "?token=" +
+        encodeURIComponent(token)
+    )
+
+    .then(response => response.json())
+
+    .then(result => {
+
+        if (!result.success) {
+
+            hasil.innerHTML = `
+                <div style="
+                    background:#fee2e2;
+                    padding:15px;
+                    border-radius:10px;
+                    color:#991b1b;
+                ">
+                    Token tidak ditemukan.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        const aduan = result.data;
+
+
+        hasil.innerHTML = `
+
+            <div style="
+                background:white;
+                padding:20px;
+                border-radius:15px;
+                box-shadow:0 4px 15px rgba(0,0,0,0.08);
+            ">
+
+                <h3 style="
+                    color:#5b21b6;
+                    margin-bottom:15px;
+                ">
+                    ${aduan.judul || "Aduan"}
+                </h3>
+
+                <p style="margin:8px 0;">
+                    <b>Nama:</b>
+                    ${aduan.nama || "-"}
+                </p>
+
+                <p style="margin:8px 0;">
+                    <b>Kategori:</b>
+                    ${aduan.kategori || "-"}
+                </p>
+
+                <p style="margin:8px 0;">
+                    <b>Status:</b>
+                    <span style="
+                        display:inline-block;
+                        background:#ede9fe;
+                        color:#5b21b6;
+                        padding:5px 10px;
+                        border-radius:20px;
+                    ">
+                        ${aduan.status || "Belum diproses"}
+                    </span>
+                </p>
+
+                <hr style="
+                    margin:20px 0;
+                    border:0;
+                    border-top:1px solid #eee;
+                ">
+
+                <p>
+                    <b>Tanggapan Admin:</b>
+                </p>
+
+                <div style="
+                    margin-top:10px;
+                    background:#f9f7ff;
+                    padding:15px;
+                    border-radius:10px;
+                ">
+                    ${
+                        aduan.tanggapan
+                        || "Belum ada tanggapan dari admin."
+                    }
+                </div>
+
+            </div>
+
+        `;
+
+    })
+
+    .catch(error => {
+
+        hasil.innerHTML = `
+            <div style="
+                background:#fee2e2;
+                padding:15px;
+                border-radius:10px;
+                color:#991b1b;
+            ">
+                Terjadi kesalahan saat mengecek aduan.
+            </div>
+        `;
+
+    });
+
+}
+
+</script>
+
 </body>
 </html>
