@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <title>Admin - Aduan Desa Sepinggan</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -19,6 +21,11 @@
       padding: 30px;
     }
 
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
     h1 {
       color: #5b21b6;
       margin-bottom: 10px;
@@ -29,11 +36,6 @@
       margin-bottom: 25px;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: auto;
-    }
-
     .card {
       background: white;
       border-radius: 15px;
@@ -42,14 +44,88 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
-    .card h3 {
-      color: #5b21b6;
-      margin-bottom: 10px;
+    /* =========================
+       LOGIN
+    ========================= */
+
+    .login-box {
+      max-width: 450px;
+      margin: 80px auto;
+    }
+
+    .login-box h1 {
+      text-align: center;
+    }
+
+    .login-box p {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .login-box label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .btn-login {
+      width: 100%;
+      margin-top: 20px;
+      background: #6d28d9;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-login:hover {
+      background: #5b21b6;
+    }
+
+    .login-error {
+      margin-top: 15px;
+      padding: 12px;
+      background: #fee2e2;
+      color: #991b1b;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    /* =========================
+       ADMIN
+    ========================= */
+
+    .btn-logout {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      float: right;
+      margin-top: -50px;
+    }
+
+    .btn-logout:hover {
+      background: #b91c1c;
     }
 
     .info {
       margin: 7px 0;
       color: #444;
+      line-height: 1.6;
     }
 
     .status {
@@ -60,6 +136,12 @@
       color: #5b21b6;
       font-size: 13px;
       margin-top: 5px;
+    }
+
+    .token {
+      color: #5b21b6;
+      font-weight: bold;
+      letter-spacing: 1px;
     }
 
     label {
@@ -83,7 +165,7 @@
       resize: vertical;
     }
 
-    button {
+    .btn-simpan {
       margin-top: 15px;
       background: #6d28d9;
       color: white;
@@ -91,9 +173,10 @@
       padding: 11px 20px;
       border-radius: 8px;
       cursor: pointer;
+      font-weight: bold;
     }
 
-    button:hover {
+    .btn-simpan:hover {
       background: #5b21b6;
     }
 
@@ -107,206 +190,665 @@
       text-align: center;
       padding: 30px;
     }
+
+    @media (max-width: 600px) {
+
+      body {
+        padding: 15px;
+      }
+
+      .btn-logout {
+        float: none;
+        margin-top: 15px;
+        width: 100%;
+      }
+
+    }
+
   </style>
+
 </head>
 
 <body>
 
-<div class="container">
 
-  <h1>Admin Aduan Desa Sepinggan</h1>
-  <p class="subtitle">
-    Kelola aduan masyarakat dan berikan tanggapan.
-  </p>
+<!-- =========================================
+     LOGIN ADMIN
+========================================= -->
 
-  <div id="daftarAduan">
-    <div class="loading">
-      Memuat data aduan...
-    </div>
+<div
+  id="loginSection"
+  class="container"
+>
+
+  <div class="card login-box">
+
+    <h1>
+      🔐 Login Admin
+    </h1>
+
+    <p>
+      Admin Aduan Desa Sepinggan
+    </p>
+
+
+    <form id="formLogin">
+
+      <label>
+        Password Admin
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Masukkan password admin"
+        required
+      >
+
+
+      <button
+        type="submit"
+        class="btn-login"
+        id="btnLogin"
+      >
+        Masuk Admin
+      </button>
+
+    </form>
+
+
+    <div
+      id="loginError"
+      style="display:none;"
+    ></div>
+
   </div>
 
 </div>
 
+
+
+<!-- =========================================
+     HALAMAN ADMIN
+========================================= -->
+
+<div
+  id="adminSection"
+  class="container"
+  style="display:none;"
+>
+
+  <h1>
+    Admin Aduan Desa Sepinggan
+  </h1>
+
+  <p class="subtitle">
+    Kelola aduan masyarakat dan berikan tanggapan.
+  </p>
+
+
+  <button
+    class="btn-logout"
+    onclick="logout()"
+  >
+    Keluar
+  </button>
+
+
+  <div
+    id="daftarAduan"
+    style="clear:both; padding-top:20px;"
+  >
+
+    <div class="loading">
+      Memuat data aduan...
+    </div>
+
+  </div>
+
+</div>
+
+
+
 <script>
+
+
+// ==========================================
+// URL GOOGLE APPS SCRIPT
+// ==========================================
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbzwjGOjB3583TX5zX1GRZGAqHGVXs-Od38B7D5ygWC0TJtSDM0nMbZmbP6WBVIMYaDU/exec";
 
 
-function tampilkanAduan(data) {
+// ==========================================
+// PASSWORD ADMIN
+// ==========================================
 
-  const container = document.getElementById("daftarAduan");
-
-  container.innerHTML = "";
-
-  if (!data || data.length === 0) {
-    container.innerHTML = `
-      <div class="card kosong">
-        Belum ada aduan masyarakat.
-      </div>
-    `;
-    return;
-  }
-
-  data.forEach((aduan, index) => {
-
-    const card = document.createElement("div");
-
-    card.className = "card";
-
-    card.innerHTML = `
-
-      <h3>${aduan.judul || "Tanpa Judul"}</h3>
-
-      <p class="info">
-        <b>Nama:</b> ${aduan.nama || "-"}
-      </p>
-
-      <p class="info">
-        <b>Email:</b> ${aduan.email || "-"}
-      </p>
-
-      <p class="info">
-        <b>Kategori:</b> ${aduan.kategori || "-"}
-      </p>
-
-      <p class="info">
-        <b>Deskripsi:</b><br>
-        ${aduan.deskripsi || "-"}
-      </p>
-
-      <p class="info">
-        <b>Tanggal:</b> ${aduan.tanggal || "-"}
-      </p>
-
-      <p class="info">
-        <b>Status saat ini:</b>
-        <span class="status">
-          ${aduan.status || "Belum diproses"}
-        </span>
-      </p>
-
-      <label>Status Aduan</label>
-
-      <select id="status-${index}">
-        <option value="Belum diproses"
-          ${aduan.status === "Belum diproses" ? "selected" : ""}>
-          Belum diproses
-        </option>
-
-        <option value="Diproses"
-          ${aduan.status === "Diproses" ? "selected" : ""}>
-          Diproses
-        </option>
-
-        <option value="Selesai"
-          ${aduan.status === "Selesai" ? "selected" : ""}>
-          Selesai
-        </option>
-      </select>
-
-      <label>Tanggapan Admin</label>
-
-      <textarea
-        id="tanggapan-${index}"
-        placeholder="Tulis tanggapan untuk masyarakat..."
-      >${aduan.tanggapan || ""}</textarea>
-
-      <button onclick="simpanTanggapan(
-        ${aduan.id},
-        ${index}
-      )">
-        Simpan Tanggapan
-      </button>
-
-    `;
-
-    container.appendChild(card);
-
-  });
-}
+let passwordAdmin = "";
 
 
-function loadAduan() {
+// ==========================================
+// LOGIN
+// ==========================================
 
-  fetch(API_URL)
+document
+  .getElementById("formLogin")
+  .addEventListener("submit", function(e) {
 
-    .then(response => response.json())
+    e.preventDefault();
 
-    .then(result => {
 
-      if (result.success === false) {
-        throw new Error(result.error);
-      }
+    const password =
+      document
+        .getElementById("password")
+        .value;
 
-      tampilkanAduan(result.data);
+
+    const tombol =
+      document
+        .getElementById("btnLogin");
+
+
+    const errorBox =
+      document
+        .getElementById("loginError");
+
+
+    tombol.disabled = true;
+
+    tombol.textContent =
+      "Memeriksa...";
+
+    errorBox.style.display =
+      "none";
+
+
+    fetch(API_URL, {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type":
+          "text/plain;charset=utf-8"
+      },
+
+      body: JSON.stringify({
+
+        action: "login",
+
+        password: password
+
+      })
 
     })
 
+
+    .then(response =>
+      response.json()
+    )
+
+
+    .then(result => {
+
+      if (!result.success) {
+
+        throw new Error(
+          result.error ||
+          "Password salah"
+        );
+
+      }
+
+
+      // Simpan password hanya selama halaman terbuka
+
+      passwordAdmin = password;
+
+
+      // Tampilkan halaman admin
+
+      document
+        .getElementById("loginSection")
+        .style.display = "none";
+
+
+      document
+        .getElementById("adminSection")
+        .style.display = "block";
+
+
+      // Ambil data aduan
+
+      loadAduan();
+
+    })
+
+
     .catch(error => {
 
-      document.getElementById("daftarAduan").innerHTML = `
-        <div class="card kosong">
-          Gagal mengambil data aduan.<br>
-          ${error}
-        </div>
-      `;
+      errorBox.innerHTML =
+        "❌ " + error.message;
+
+      errorBox.className =
+        "login-error";
+
+      errorBox.style.display =
+        "block";
+
+    })
+
+
+    .finally(() => {
+
+      tombol.disabled = false;
+
+      tombol.textContent =
+        "Masuk Admin";
 
     });
 
-}
+  });
 
 
-function simpanTanggapan(id, index) {
 
-  const status =
-    document.getElementById(`status-${index}`).value;
+// ==========================================
+// LOAD DATA ADUAN
+// ==========================================
 
-  const tanggapan =
-    document.getElementById(`tanggapan-${index}`).value;
+function loadAduan() {
 
-  if (tanggapan.trim() === "") {
+  document
+    .getElementById("daftarAduan")
+    .innerHTML = `
 
-    alert("Tanggapan belum diisi!");
+      <div class="card loading">
+        🔄 Memuat data aduan...
+      </div>
 
-    return;
-  }
-
-  const data = {
-
-    action: "tanggapan",
-
-    id: id,
-
-    status: status,
-
-    tanggapan: tanggapan
-
-  };
+    `;
 
 
   fetch(API_URL, {
 
     method: "POST",
 
-    body: JSON.stringify(data)
+    headers: {
+      "Content-Type":
+        "text/plain;charset=utf-8"
+    },
+
+    body: JSON.stringify({
+
+      action: "getAduan",
+
+      password: passwordAdmin
+
+    })
 
   })
 
-  .then(response => response.json())
+
+  .then(response =>
+    response.json()
+  )
+
+
+  .then(result => {
+
+    if (!result.success) {
+
+      throw new Error(
+        result.error ||
+        "Gagal mengambil data"
+      );
+
+    }
+
+
+    tampilkanAduan(
+      result.data
+    );
+
+  })
+
+
+  .catch(error => {
+
+    document
+      .getElementById("daftarAduan")
+      .innerHTML = `
+
+        <div class="card kosong">
+
+          ❌ Gagal mengambil data aduan.
+
+          <br><br>
+
+          ${escapeHTML(error.message)}
+
+        </div>
+
+      `;
+
+  });
+
+}
+
+
+
+// ==========================================
+// TAMPILKAN DATA ADUAN
+// ==========================================
+
+function tampilkanAduan(data) {
+
+  const container =
+    document
+      .getElementById("daftarAduan");
+
+
+  container.innerHTML = "";
+
+
+  if (
+    !data ||
+    data.length === 0
+  ) {
+
+    container.innerHTML = `
+
+      <div class="card kosong">
+
+        Belum ada aduan masyarakat.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  data.forEach(
+    function(aduan, index) {
+
+      const card =
+        document.createElement("div");
+
+
+      card.className =
+        "card";
+
+
+      card.innerHTML = `
+
+        <h3 style="color:#5b21b6; margin-bottom:15px;">
+
+          ${escapeHTML(
+            aduan.judul ||
+            "Tanpa Judul"
+          )}
+
+        </h3>
+
+
+        <p class="info">
+
+          <b>Token:</b>
+
+          <span class="token">
+
+            ${escapeHTML(
+              aduan.token || "-"
+            )}
+
+          </span>
+
+        </p>
+
+
+        <p class="info">
+
+          <b>Nama:</b>
+          ${escapeHTML(
+            aduan.nama || "-"
+          )}
+
+        </p>
+
+
+        <p class="info">
+
+          <b>Email:</b>
+          ${escapeHTML(
+            aduan.email || "-"
+          )}
+
+        </p>
+
+
+        <p class="info">
+
+          <b>Kategori:</b>
+          ${escapeHTML(
+            aduan.kategori || "-"
+          )}
+
+        </p>
+
+
+        <p class="info">
+
+          <b>Deskripsi:</b><br>
+
+          ${escapeHTML(
+            aduan.deskripsi || "-"
+          )}
+
+        </p>
+
+
+        <p class="info">
+
+          <b>Tanggal:</b>
+          ${escapeHTML(
+            aduan.tanggal || "-"
+          )}
+
+        </p>
+
+
+        <p class="info">
+
+          <b>Status saat ini:</b>
+
+          <span class="status">
+
+            ${escapeHTML(
+              aduan.status ||
+              "Belum diproses"
+            )}
+
+          </span>
+
+        </p>
+
+
+        <label>
+          Status Aduan
+        </label>
+
+
+        <select
+          id="status-${index}"
+        >
+
+          <option
+            value="Belum diproses"
+            ${
+              aduan.status ===
+              "Belum diproses"
+              ? "selected"
+              : ""
+            }
+          >
+            Belum diproses
+          </option>
+
+
+          <option
+            value="Diproses"
+            ${
+              aduan.status ===
+              "Diproses"
+              ? "selected"
+              : ""
+            }
+          >
+            Diproses
+          </option>
+
+
+          <option
+            value="Selesai"
+            ${
+              aduan.status ===
+              "Selesai"
+              ? "selected"
+              : ""
+            }
+          >
+            Selesai
+          </option>
+
+        </select>
+
+
+        <label>
+          Tanggapan Admin
+        </label>
+
+
+        <textarea
+          id="tanggapan-${index}"
+          placeholder="Tulis tanggapan untuk masyarakat..."
+        >${escapeHTML(
+          aduan.tanggapan || ""
+        )}</textarea>
+
+
+        <button
+          class="btn-simpan"
+          onclick="simpanTanggapan(
+            ${JSON.stringify(aduan.id)},
+            ${index}
+          )"
+        >
+
+          💾 Simpan Tanggapan
+
+        </button>
+
+      `;
+
+
+      container.appendChild(card);
+
+    }
+  );
+
+}
+
+
+
+// ==========================================
+// SIMPAN TANGGAPAN
+// ==========================================
+
+function simpanTanggapan(
+  id,
+  index
+) {
+
+  const status =
+    document
+      .getElementById(
+        `status-${index}`
+      )
+      .value;
+
+
+  const tanggapan =
+    document
+      .getElementById(
+        `tanggapan-${index}`
+      )
+      .value;
+
+
+  if (
+    tanggapan.trim() === ""
+  ) {
+
+    alert(
+      "Tanggapan belum diisi!"
+    );
+
+    return;
+
+  }
+
+
+  fetch(API_URL, {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type":
+        "text/plain;charset=utf-8"
+    },
+
+    body: JSON.stringify({
+
+      action: "tanggapan",
+
+      password: passwordAdmin,
+
+      id: id,
+
+      status: status,
+
+      tanggapan: tanggapan
+
+    })
+
+  })
+
+
+  .then(response =>
+    response.json()
+  )
+
 
   .then(result => {
 
     if (result.success) {
 
-      alert("Tanggapan berhasil disimpan!");
+      alert(
+        "✅ Tanggapan berhasil disimpan!"
+      );
+
 
       loadAduan();
 
-    } else {
+    }
+
+    else {
 
       alert(
-        "Gagal menyimpan: " +
+        "❌ Gagal menyimpan:\n" +
         result.error
       );
 
@@ -314,11 +856,12 @@ function simpanTanggapan(id, index) {
 
   })
 
+
   .catch(error => {
 
     alert(
-      "Terjadi kesalahan: " +
-      error
+      "❌ Terjadi kesalahan:\n" +
+      error.message
     );
 
   });
@@ -326,7 +869,56 @@ function simpanTanggapan(id, index) {
 }
 
 
-loadAduan();
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+function logout() {
+
+  passwordAdmin = "";
+
+
+  document
+    .getElementById("adminSection")
+    .style.display = "none";
+
+
+  document
+    .getElementById("loginSection")
+    .style.display = "block";
+
+
+  document
+    .getElementById("password")
+    .value = "";
+
+
+  document
+    .getElementById("daftarAduan")
+    .innerHTML = "";
+
+}
+
+
+
+// ==========================================
+// ESCAPE HTML
+// ==========================================
+
+function escapeHTML(text) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    text == null
+      ? ""
+      : String(text);
+
+  return div.innerHTML;
+
+}
 
 </script>
 
